@@ -1,36 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Input, Button, List } from 'antd'
 import 'antd/dist/antd.css'
-import store from './store'
 import { connect } from 'react-redux'
 
-class TodoList extends Component {
-    constructor(props) {
-        super(props)
-        this.state = store.getState()
-    }
+const TodoList = (props) => {
+    const { inputValue, list, inputChange, onAdd, onDel } = props
 
-    componentDidMount() {
-    }
-
-    storeChange = () => {
-        
-    }
-
-    render() {
-        const { inputValue, list, inputChange, onAdd, onDel } = this.props
-        return (
-            <div>
-                <Input style={{ width: '250px' }} value={inputValue} onChange={inputChange} />
-                <Button type="primary" onClick={onAdd}>增加</Button>
-                <List
-                    bordered
-                    dataSource={list}
-                    renderItem={(item, index) => (<List.Item onDoubleClick={() => onDel(index)}>{item}</List.Item>)}
-                />
-            </div>
-        )
-    }
+    return (
+        <div>
+            <Input style={{ width: '250px' }} value={inputValue} onChange={inputChange} />
+            <Button type="primary" onClick={onAdd}>增加</Button>
+            <List
+                bordered
+                dataSource={list}
+                renderItem={(item, index) => (<List.Item onDoubleClick={() => onDel(index)}>{item}</List.Item>)}
+            />
+        </div>
+    )
 }
 
 const stateToProps = (state) => {
